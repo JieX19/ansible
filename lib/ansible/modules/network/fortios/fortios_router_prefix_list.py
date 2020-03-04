@@ -289,11 +289,14 @@ def router_prefix_list(data, fos):
         state = True
     router_prefix_list_data = data['router_prefix_list']
     filtered_data = underscore_to_hyphen(filter_router_prefix_list_data(router_prefix_list_data))
+    
+    params = { "plugin" : 1 }
 
     if state == "present":
         return fos.set('router',
                        'prefix-list',
                        data=filtered_data,
+                       parameters=params,
                        vdom=vdom)
 
     elif state == "absent":
